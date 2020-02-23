@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React from "react"
+import styled from "styled-components"
+import { Route } from "react-router-dom"
+import Registration from "./Pages/Registration"
+import Success from "./Pages/Success"
+import LoginPage from "./Pages/LoginPage"
+import DataTable from "./Pages/DataTable"
+import UserDetails from "./Pages/UserDetails"
+import ErrorBoundries from "/Users/mihirdharangaonkar/forms-app/src/ErrorBoundries.js"
+import backIcon from "/Users/mihirdharangaonkar/forms-app/src/Icons/Back.jpeg"
 function App() {
+  const BigContainer = styled.div`
+    margin-left: 40px;
+    margin-right: 40px;
+    height: 100%;
+  `
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <BigContainer>
+        <ErrorBoundries>
+          <Route exact path="/" component={LoginPage} />
+
+          <Route path="/registration" component={Registration} />
+          <Route path="/Success" component={Success} />
+          <Route path="/datatable" component={DataTable} />
+
+          <Route path="/userdetails/:task" component={UserDetails} />
+        </ErrorBoundries>
+      </BigContainer>
+    </>
+  )
 }
 
-export default App;
+export default App
