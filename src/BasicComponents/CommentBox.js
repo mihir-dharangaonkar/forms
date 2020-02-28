@@ -1,21 +1,18 @@
-import React, { useState } from "react"
+import React from "react"
 import { Form, TextArea } from "semantic-ui-react"
 import { TOTAL_LENGTH } from "/Users/mihirdharangaonkar/forms-app/src/Constants/URI.js"
 
-const CommentBox = () => {
-  const [value, setValue] = useState("")
+const CommentBox = ({ onComment }) => {
   return (
     <>
       <Form>
         <TextArea
           rows={5}
           placeholder="Enter the detail here..."
-          onChange={(e) => setValue(e.target.value)}
-          value={value}
+          onChange={onComment}
           maxLength={TOTAL_LENGTH}
         />
       </Form>
-      {`${value.length}/${TOTAL_LENGTH}`}
     </>
   )
 }

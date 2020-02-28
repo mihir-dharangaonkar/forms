@@ -5,7 +5,7 @@ import styled from "styled-components"
 import Buttons from "/Users/mihirdharangaonkar/forms-app/src/BasicComponents/Buttons.js"
 import { useFormik } from "formik"
 import { toast } from "react-toastify"
-import logo from "/Users/mihirdharangaonkar/forms-app/src/Icons/SideBar.png"
+import logo from "/Users/mihirdharangaonkar/forms-app/src/Icons/Bank_icon.png"
 import backIcon from "/Users/mihirdharangaonkar/forms-app/src/Icons/Back.jpeg"
 
 const Container = styled.div`
@@ -13,7 +13,7 @@ const Container = styled.div`
   height: 300px;
   width: 300px;
   margin: auto;
-  margin-top:200px;
+  margin-top: 200px;
 `
 const LoginContainer = styled.div`
   background-image: url(${backIcon});
@@ -57,18 +57,17 @@ const LoginPage = ({ history }) => {
       <Container>
         <Form onSubmit={formik.handleSubmit}>
           <Form.Field>
-            <label style={{color:'white',fontWeight:'bold'}}>UserName</label>
+            <label style={{ color: "white", fontWeight: "bold" }}>UserName</label>
             <input
               type="email"
               name="email"
-
               placeholder="Email"
               onChange={formik.handleChange}
               value={formik.values.email}
             />
           </Form.Field>
           <Form.Field>
-            <label style={{color:'white',fontWeight:'bold'}}>Password</label>
+            <label style={{ color: "white", fontWeight: "bold" }}>Password</label>
             <input
               type="password"
               name="password"
@@ -85,7 +84,7 @@ const LoginPage = ({ history }) => {
               value={show}
             />
           </Form.Field>
-          <Buttons />
+          <Buttons text="Submit" />
         </Form>
       </Container>
     </LoginContainer>

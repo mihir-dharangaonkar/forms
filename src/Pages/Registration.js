@@ -1,14 +1,16 @@
 import React, { useState } from "react"
-import { Message, Table, Button, Form, Input, Dropdown } from "semantic-ui-react"
+import { Message, Table, Button, Form, Input } from "semantic-ui-react"
 import InputBox from "/Users/mihirdharangaonkar/forms-app/src/BasicComponents/InputBox.js"
 import Header from "/Users/mihirdharangaonkar/forms-app/src/BasicComponents/Header.js"
-import Select from "/Users/mihirdharangaonkar/forms-app/src/BasicComponents/Select.js"
+import CustomSelect from "/Users/mihirdharangaonkar/forms-app/src/BasicComponents/Select.js"
 import RadioButton from "/Users/mihirdharangaonkar/forms-app/src/BasicComponents/RadioButton.js"
 import CommentBox from "/Users/mihirdharangaonkar/forms-app/src/BasicComponents/CommentBox.js"
 import CheckBoxes from "/Users/mihirdharangaonkar/forms-app/src/BasicComponents/CheckBoxes.js"
 import styled from "styled-components"
-import Popupwindow from "/Users/mihirdharangaonkar/forms-app/src/BasicComponents/Popupwindow.js"
+
 import UserIcon from "/Users/mihirdharangaonkar/forms-app/src/Icons/User.png"
+import { TOTAL_LENGTH } from "/Users/mihirdharangaonkar/forms-app/src/Constants/URI.js"
+import { Modal } from "semantic-ui-react"
 
 const Registration = ({ history }) => {
   const options = [
@@ -38,7 +40,13 @@ const Registration = ({ history }) => {
   ]
   const [name, setName] = useState("")
   const [lastName, setLastName] = useState("")
-  const [country, setCountry] = useState('bs')
+  const [country, setCountry] = useState("bs")
+  const [date, setDate] = useState("")
+  const [doc, setDoc] = useState([])
+  const [comment, setComment] = useState("")
+  const [gender, setGender] = useState("")
+  const [popUpCountry, setPopUpCountry] = useState("")
+
   const MessageWrapper = styled.div`
     width: 600px;
     padding: 10px;
@@ -48,8 +56,13 @@ const Registration = ({ history }) => {
     justify-content: space-between;
     padding: 10px;
   `
-  const Labels = ["Male", "Female", "Other"]
+  const Labels = [
+    { Label: "Male", value: 1 },
+    { Label: "Female", value: 2 },
+    { Label: "Other", value: 3 }
+  ]
 
+  const values = [name, lastName, country, date, comment, gender, popUpCountry,doc]
   return (
     <Form>
       <Form.Field>
@@ -90,20 +103,24 @@ const Registration = ({ history }) => {
             <Table.Row>
               <Table.Cell>Select your country </Table.Cell>
               <Table.Cell>
-                <Select
+                <CustomSelect
                   id="countryDropDown"
                   name="countryDropDown"
                   options={options}
-                  Value={country}
-                  handleChange={(e) => setCountry(e.target.value )}
+                  value={country}
+                  handleChange={(e, v) => setCountry(v.value)}
                 />
               </Table.Cell>
-              {console.log(country)}
             </Table.Row>
             <Table.Row>
               <Table.Cell>Select your Gender </Table.Cell>
               <Table.Cell>
-                <RadioButton id="radiogroup" options={Labels} name="radiogroup" />
+                <RadioButton
+                  options={Labels}
+                  value={gender}
+                  handleChange={(e, v) => setGender(v.value)}
+                  name="radiogroup"
+                />
               </Table.Cell>
             </Table.Row>
             <Table.Row>
@@ -115,25 +132,60 @@ const Registration = ({ history }) => {
             <Table.Row>
               <Table.Cell>Select the Date of Birth </Table.Cell>
               <Table.Cell>
-                <InputBox id="date" type="Date" name="date" />
+                <InputBox
+                  id="date"
+                  type="Date"
+                  name="date"
+                  value={date}
+                  onPress={(e) => setDate(e.target.value)}
+                />
               </Table.Cell>
             </Table.Row>
             <Table.Row>
               <Table.Cell>Select your Country for tax purpose</Table.Cell>
               <Table.Cell>
-                <Popupwindow />
+                {`${popUpCountry}`}
+                <Modal trigger={<Button secondary>Add Taxation Country</Button>}>
+                  <Modal.Header>Select one country</Modal.Header>
+                  <Modal.Content>
+                    <CustomSelect
+                      id="countryDropDown"
+                      name="countryDropDown"
+                      options={options}
+                      value={popUpCountry}
+                      handleChange={(e, v) => setPopUpCountry(v.value)}
+                    />
+                    <Button secondary style={{ margin: "60px" }}>
+                      Add
+                    </Button>
+                    <p> {`Do you have TIN with you?`} </p>
+                    <RadioButton options={Labels} />
+                  </Modal.Content>
+                </Modal>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
               <Table.Cell>Upload the Documents</Table.Cell>
               <Table.Cell>
-                <InputBox id="file" type="file" name="fileUpload" />
+                <InputBox
+                  id="file"
+                  type="file"
+                  name="fileUpload"
+                  value={doc}
+                  onPress={(e) => setDoc({file:e.target.files[0].name})}
+                />
               </Table.Cell>
             </Table.Row>
             <Table.Row>
               <Table.Cell>Comments </Table.Cell>
               <Table.Cell>
-                <CommentBox id="comments" name="comments" />
+                <CommentBox
+                  id="comments"
+                  name="comments"
+                  value={comment}
+                  onComment={(e) => setComment(e.target.value)}
+                />
+                {`${comment.length}/${TOTAL_LENGTH}`}
               </Table.Cell>
             </Table.Row>
           </Table.Body>
@@ -163,7 +215,7 @@ const Registration = ({ history }) => {
             secondary
             type="button"
             onClick={() => {
-              alert(country)
+              alert(JSON.stringify(values))
               history.push(`/Success`)
             }}
           >

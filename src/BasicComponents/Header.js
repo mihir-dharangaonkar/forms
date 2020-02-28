@@ -7,10 +7,9 @@ const Banner = styled.div`
   display: flex;
   border: 1px solid black;
   width: 100%;
-  background-color: white;
-
+  background-color: black;
   height: 60px;
-  color: black;
+  color: white;
 `
 const Text = styled.h1`
   margin: 0 auto;
@@ -21,8 +20,9 @@ const Header = (Props) => (
   <>
     <Banner>
       <ImageView
+
         path={Props.path}
-        style={{ width: 80, height: 80 }}
+        style={{ width: 80, height: 80 ,color:"white"}}
         handleClick={Props.handleClick}
       />
       <Text>{Props.header}</Text>

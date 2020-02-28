@@ -1,6 +1,6 @@
-import React, { useState } from "react"
+import React from "react"
 import styled from "styled-components"
-import { Form, Radio } from "semantic-ui-react"
+import { Form } from "semantic-ui-react"
 
 const Wrapper = styled.div`
   display: flex;
@@ -11,12 +11,17 @@ const Wrapper = styled.div`
   padding: 10px;
 `
 
-const RadioButton = ({ options, selected, setValue }) => {
+const RadioButton = ({ options, selected, handleChange }) => {
   return (
     <div>
       {options.map((option) => (
-        <Wrapper key={option.value}>
-          <Form.Radio name="radio-group" value={option.value} label={option} />
+        <Wrapper key={option.key}>
+          <Form.Radio
+            name="radio-group"
+            label={option.Label}
+            value={option.value}
+            onChange={handleChange}
+          />
         </Wrapper>
       ))}
     </div>

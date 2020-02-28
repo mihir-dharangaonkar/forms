@@ -7,7 +7,7 @@ import LoginPage from "./Pages/LoginPage"
 import DataTable from "./Pages/DataTable"
 import UserDetails from "./Pages/UserDetails"
 import ErrorBoundries from "/Users/mihirdharangaonkar/forms-app/src/ErrorBoundries.js"
-import backIcon from "/Users/mihirdharangaonkar/forms-app/src/Icons/Back.jpeg"
+
 function App() {
   const BigContainer = styled.div`
     margin-left: 40px;
