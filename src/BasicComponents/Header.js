@@ -20,9 +20,8 @@ const Header = (Props) => (
   <>
     <Banner>
       <ImageView
-
         path={Props.path}
-        style={{ width: 80, height: 80 ,color:"white"}}
+        style={{ width: 80, height: 80, color: "white" }}
         handleClick={Props.handleClick}
       />
       <Text>{Props.header}</Text>

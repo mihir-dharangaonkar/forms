@@ -46,6 +46,7 @@ const Registration = ({ history }) => {
   const [comment, setComment] = useState("")
   const [gender, setGender] = useState("")
   const [popUpCountry, setPopUpCountry] = useState("")
+  const [religion, setReligion] = useState(false)
 
   const MessageWrapper = styled.div`
     width: 600px;
@@ -62,7 +63,23 @@ const Registration = ({ history }) => {
     { Label: "Other", value: 3 }
   ]
 
-  const values = [name, lastName, country, date, comment, gender, popUpCountry,doc]
+  const LabelName = [
+    { Label: "Hindu", value: 1 },
+    { Label: "Buddhist", value: 2 },
+    { Label: "Jews", value: 3 }
+  ]
+
+  const values = [
+    name,
+    lastName,
+    country,
+    date,
+    comment,
+    religion,
+    gender,
+    popUpCountry,
+    doc
+  ]
   return (
     <Form>
       <Form.Field>
@@ -126,7 +143,13 @@ const Registration = ({ history }) => {
             <Table.Row>
               <Table.Cell>Select your religion: </Table.Cell>
               <Table.Cell>
-                <CheckBoxes id="religion" name="religion" />
+                <CheckBoxes
+                  id="religion"
+                  name="religion"
+                  LabelName={LabelName}
+                  value={religion}
+                  handleChange={(e) => setReligion(e.target.value)}
+                />
               </Table.Cell>
             </Table.Row>
             <Table.Row>
@@ -172,7 +195,7 @@ const Registration = ({ history }) => {
                   type="file"
                   name="fileUpload"
                   value={doc}
-                  onPress={(e) => setDoc({file:e.target.files[0].name})}
+                  onPress={(e) => setDoc({ file: e.target.files[0].name })}
                 />
               </Table.Cell>
             </Table.Row>

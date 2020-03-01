@@ -8,13 +8,13 @@ const Wrapper = styled.div`
   justify-content: flex-start;
 `
 
-const ImageView = (props, width, height, onClick,color) => {
+const ImageView = (props, width, height, onClick, color) => {
   return (
     <Wrapper>
       <Image
         src={props.path}
         alt="Logo"
-        style={{ width: { width }, height: { height },color: {color} }}
+        style={{ width: { width }, height: { height }, color: { color } }}
         onClick={props.handleClick}
       />
     </Wrapper>

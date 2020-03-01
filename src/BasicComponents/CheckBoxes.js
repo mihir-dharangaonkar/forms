@@ -1,18 +1,19 @@
 import React from "react"
-import { Checkbox } from "semantic-ui-react"
-import styled from "styled-components"
+import { Form,Checkbox } from "semantic-ui-react"
 
-const LabelName = ["Hindu", "Buddhist", "Musalman", "Jews"]
-const Wrapper = styled.div``
 
-const CheckBoxes = () => (
+
+
+const CheckBoxes = ({ handleChange, LabelName }) => {
+  return(
   <>
     {LabelName.map((labels) => (
-      <Wrapper key={LabelName.index}>
-        <Checkbox label={labels} />
-      </Wrapper>
+        <Form key={labels.value}>
+        <Checkbox label={labels.Label} onChange={handleChange} />
+      </Form>
     ))}
   </>
-)
+  )
+    }
 
 export default CheckBoxes
