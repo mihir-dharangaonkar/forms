@@ -3,7 +3,6 @@ import ReactDOM from "react-dom"
 import "./index.css"
 import Root from "./Root"
 import "semantic-ui-css/semantic.min.css"
-import "react-toastify/dist/ReactToastify.css"
 
 ReactDOM.render(<Root />, document.getElementById("root"))
 
